@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Liste des Bailleurs</h1>
+  <a href="{{ path('bailleur_create') }}" class="btn btn-success float-right">Ajouter un bailleur</a>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nom du bailleur</th>
+        <th>Intitutlet</th>
+        <th>Adresse</th>
+        <th>Code postale</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bailleur in bailleurs %}
+        <tr>
+          <td>{{bailleur.name}}</td>
+          <td>{{bailleur.intitulet}}</td>
+          <td>{{bailleur.adresse}}</td>
+          <td>{{bailleur.codePostal}}</td>
+          <td>
+            <a href="{{path('bailleur_edit', {'id': bailleur.id})}}" class="btn btn-primary btn-sm">Voir</a>
+            <a href="{{path('bailleur_update', {'id':bailleur.id})}}" class="btn btn-secondary btn-sm">Modifier</a>
+            <a href="{{ path('bailleur_delete' , {'id':bailleur.id}) }}" class="btn btn-danger btn-sm" onclick="confirm('voulais vous vraiment supprimer ce bailleur!')">Supprimer</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

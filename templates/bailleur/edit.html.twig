@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a class="btn btn-success btn-lg mt-2" href="{{path('bailleur')}}" role="button">Retour a la liste</a>
+    <div class="jumbotron mt-2">
+         <h3 class="display-4">{{bailleur.name}}</h3>
+         <p class="lead">{{bailleur.adresse}} | {{bailleur.codePostal}}</p>
+         <hr class="my-4">
+         <p>{{bailleur.intitulet}}</p>
+         <p class="lead">
+           <a class="btn btn-primary btn-lg" href="{{path('bailleur_update', {'id':bailleur.id})}}" role="button">Modifier</a>
+         </p>
+    </div>
+{% endblock %}
