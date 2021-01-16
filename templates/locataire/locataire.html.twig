@@ -2,4 +2,20 @@
 
 {% block body %}
   <h1>locataire</h1>
+  <a href="{{path('locataire_add')}}" class="btn btn-success">Ajouter un Locataire</a>
+  <ul class="list-group">
+      {% for locataire in locataires %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{locataire.nom}} {{locataire.prenom}}
+            <div>
+              <a href="{{path('locataire_update', {'id':locataire.id})}}" class="btn btn-primary btn-sm">Modifier</a>
+              <a href="{{path('locataire_delete', {'id':locataire.id})}}"
+                 class="btn btn-danger btn-sm"
+                 onclick="confirm('voulais vous supprimer ce locataire!')"
+                 >Supprimer</a>
+            </div>
+          </li>
+      {% endfor %}
+  </ul>
+
 {% endblock %}

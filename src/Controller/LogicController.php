@@ -7,15 +7,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\BailleurRepository;
+use App\Repository\LocataireRepository;
 
 class LogicController extends AbstractController
 {
     /**
      * @Route("/", name="locataire")
      */
-    public function locataire(): Response
+    public function locataire(LocataireRepository $locataire): Response
     {
-      return $this->render('locataire/locataire.html.twig');
+      return $this->render('locataire/locataire.html.twig',[
+                            "locataires"=> $locataire->findAll()
+      ]);
     }
 
     /**

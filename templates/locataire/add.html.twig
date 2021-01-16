@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2 class="text-muted mt-3">Ajouter un locataire</h2>
+  {{form_start(form)}}
+    {{form_widget(form)}}
+    <button type="submit" name="button" class="btn btn-primary btn-lg btn-block">{{ modif ? 'Modifier' : 'Enregistrer'}}</button>
+  {{form_end(form)}}
+{% endblock %}
