@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\BailleurRepository;
 use App\Repository\LocataireRepository;
+use App\Repository\BienRepository;
 
 class LogicController extends AbstractController
 {
@@ -29,6 +30,15 @@ class LogicController extends AbstractController
       $bailleurs = $bailleur->findAll();
       return $this->render('bailleur/bailleur.html.twig',
                             ['bailleurs'=>$bailleurs]);
+    }
+
+    /**
+     * @Route("/bien", name="bien")
+     */
+    public function bien(BienRepository $bien): Response
+    {
+      return $this->render('bien/bien.html.twig',
+                            ['biens'=>$bien->findAll()]);
     }
 
     /**

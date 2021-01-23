@@ -27,6 +27,11 @@ class Locataire
      */
     private $prenom;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Bien::class, mappedBy="locataireId", cascade={"persist", "remove"})
+     */
+    private $bien;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,23 @@ class Locataire
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getBien(): ?Bien
+    {
+        return $this->bien;
+    }
+
+    public function setBien(Bien $bien): self
+    {
+        // set the owning side of the relation if necessary
+        if ($bien->getLocataireId() !== $this) {
+            $bien->setLocataireId($this);
+        }
+
+        $this->bien = $bien;
 
         return $this;
     }

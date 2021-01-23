@@ -8,7 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Locataire;
+use App\Entity\Bien;
 use App\Repository\LocataireRepository;
+use App\Repository\BienRepository;
 use App\Form\LocataireType;
 
 class LocataireController extends AbstractController
@@ -22,7 +24,7 @@ class LocataireController extends AbstractController
      * @Route("/locataire/new", name="locataire_add")
      * @Route("/locataire/{id}/edit", name="locataire_update")
      */
-    public function formLocataire($id=0,Request $req): Response
+    public function formLocataire($id=0,Request $req, BienRepository $bien): Response
     {
       $locataire = $this->locataireRepository->find($id);
       $modif = true;
@@ -33,12 +35,13 @@ class LocataireController extends AbstractController
       $form = $this->createForm(LocataireType::class,$locataire);
       $form->handleRequest($req);
       if ($form->isSubmitted() && $form->isValid()) {
-         $this->locataireRepository->create($locataire);
-         return $this->redirectToRoute('locataire' ,["locataires" => $this->locataireRepository->findAll()]);
+        $this->locataireRepository->create($locataire);
+        return $this->redirectToRoute('locataire' ,["locataires" => $this->locataireRepository->findAll()]);
       }
         return $this->render('locataire/add.html.twig', [
             'form' => $form->createView(),
             'modif' => $modif,
+            'biens' => $bien->findAll(),
         ]);
     }
 
